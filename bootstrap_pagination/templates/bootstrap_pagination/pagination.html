@@ -3,56 +3,57 @@
 <ul class="pagination{% if size == "small" %} pagination-sm{% endif %}{% if size == "large" %} pagination-lg{% endif %}{% block extra_classes %}{% endblock %}">
 {% if show_first_last %}
     {% if not page.has_previous %}
-      <li class="disabled">
-        <span>{{ first_label }}</span>
+      <li class="page-item disabled">
+        <a href="#" class="page-link">{{ first_label }}</a>
       </li>
     {% else %}
-      <li>
-        <a title="{% trans 'First Page' %}" href="{{ first_page_url|default:"#"|escape }}">{{first_label}}</a>
+
+      <li class="page-item">
+        <a title="{% trans 'First Page' %}" href="{{ first_page_url|default:"#"|escape }}" class="page-link">{{first_label}}</a>
       </li>
     {% endif %}
 {% endif %}
 {% if show_prev_next %}
     {% if not page.has_previous %}
-      <li class="disabled">
-        <span title="{% trans 'Previous Page' %}">{{ previous_label }}</span>
+      <li class="page-item disabled">
+        <a href="#" title="{% trans 'Previous Page' %}" class="page-link">{{ previous_label }}</a>
       </li>
     {% else %}
-      <li>
-        <a title="{% trans 'Previous Page' %}" href="{{ previous_page_url|default:"#"|escape }}">{{ previous_label }}</a>
+      <li class="page-item">
+        <a title="{% trans 'Previous Page' %}" href="{{ previous_page_url|default:"#"|escape }}" class="page-link">{{ previous_label }}</a>
       </li>
     {% endif %}
 {% endif %}
 {% for pagenum, index_range, url in page_urls %}
     {% if page.number == pagenum %}
-        <li class="active">
-            <span title="{% trans 'Current Page' %}">{% if show_index_range %} {{ index_range }} {% else %} {{ pagenum }} {%endif %}</span>
+        <li class="active page-item">
+        		<a href="#" title="{% trans 'Current Page' %}" class="page-link">{% if show_index_range %} {{ index_range }} {% else %} {{ pagenum }} {%endif %}</a>
         </li>
     {% else %}
-        <li>
-            <a title="{% trans 'Page' %} {{ pagenum }} {% trans 'of' %} {{ page.paginator.num_pages }}" href="{{ url|escape }}">{% if show_index_range %} {{ index_range }} {% else %} {{ pagenum }} {%endif %}</a>
+      	<li class="page-item">
+            <a class="page-link" title="Page {{ pagenum }} of {{ page.paginator.num_pages }}" href="{{ url|escape }}">{% if show_index_range %} {{ index_range }} {% else %} {{ pagenum }} {%endif %}</a>
         </li>
     {% endif %}
 {% endfor %}
 {% if show_prev_next %}
     {% if not page.has_next %}
-      <li class="disabled">
-        <span title="{% trans 'Next Page' %}">{{ next_label }}</span>
+      <li class="disabled page-item">
+        <a href="#" title="{% trans 'Next Page' %}" class="page-link">{{ next_label }}</a>
       </li>
     {% else %}
-      <li>
-        <a title="{% trans 'Next Page' %}" href="{{ next_page_url|default:"#"|escape }}">{{ next_label }}</a>
+    	<li class="page-item">
+        <a title="{% trans 'Next Page' %}" href="{{ next_page_url|default:"#"|escape }}" class="page-link">{{ next_label }}</a>
       </li>
     {% endif %}
 {% endif %}
 {% if show_first_last %}
     {% if not page.has_next %}
-      <li class="disabled">
-        <span title="{% trans 'Last Page' %}" >{{ last_label }}</span>
+      <li class="disabled page-item">
+        <a href="#" title="{% trans 'Last Page' %}" class="page-link">{{ last_label }}</a>
       </li>
     {% else %}
-      <li>
-        <a title="{% trans 'Last Page' %}" href="{{ last_page_url|default:"#"|escape }}">{{last_label}}</a>
+    	<li class="page-item">
+        <a title="{% trans 'Last Page' %}" href="{{ last_page_url|default:"#"|escape }}" class="page-link">{{last_label}}</a>
       </li>
     {% endif %}
 {% endif %}
